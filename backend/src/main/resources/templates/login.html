@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceTracker | Sign In</title>
+    <style>
+        :root {
+            --bg-1: #f7f4ea;
+            --bg-2: #d9ebdd;
+            --surface: rgba(255, 255, 255, 0.78);
+            --surface-solid: #ffffff;
+            --text: #193127;
+            --muted: #48685a;
+            --primary: #0f7b5f;
+            --primary-strong: #0a5a45;
+            --accent: #e7b45a;
+            --danger: #ab2f2f;
+            --ring: rgba(15, 123, 95, 0.3);
+            --shadow: 0 18px 45px rgba(21, 59, 45, 0.2);
+            --radius-lg: 24px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --font-heading: "Poppins", "Segoe UI", "Helvetica Neue", sans-serif;
+            --font-body: "Nunito Sans", "Segoe UI", "Helvetica Neue", sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 15%, rgba(231, 180, 90, 0.25), transparent 45%),
+                radial-gradient(circle at 82% 92%, rgba(15, 123, 95, 0.17), transparent 48%),
+                linear-gradient(130deg, var(--bg-1), var(--bg-2));
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .login-shell {
+            width: min(980px, 100%);
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(4px);
+            animation: rise-in 650ms ease-out both;
+            background: var(--surface);
+        }
+
+        .brand-panel {
+            position: relative;
+            isolation: isolate;
+            padding: clamp(1.8rem, 4.5vw, 3rem);
+            color: #f3f7f5;
+            background:
+                linear-gradient(155deg, rgba(10, 90, 69, 0.93), rgba(15, 123, 95, 0.86)),
+                repeating-linear-gradient(
+                    -40deg,
+                    rgba(255, 255, 255, 0.06) 0 12px,
+                    rgba(255, 255, 255, 0) 12px 22px
+                );
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            inset: auto -90px -90px auto;
+            width: 230px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(231, 180, 90, 0.24);
+            filter: blur(1px);
+            z-index: -1;
+        }
+
+        .brand-mark {
+            font: 700 0.88rem/1 var(--font-heading);
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+            opacity: 0.95;
+        }
+
+        .brand-copy h1 {
+            margin: 0.85rem 0 0.8rem;
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            line-height: 1.1;
+        }
+
+        .brand-copy p {
+            margin: 0;
+            max-width: 32ch;
+            line-height: 1.55;
+            color: rgba(243, 247, 245, 0.88);
+        }
+
+        .pulse-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pulse-stats div {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 0.7rem 0.55rem;
+            text-align: center;
+        }
+
+        .pulse-stats strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .pulse-stats span {
+            font-size: 0.78rem;
+            opacity: 0.88;
+        }
+
+        .form-panel {
+            background: var(--surface-solid);
+            padding: clamp(1.5rem, 4.8vw, 3rem);
+            display: grid;
+            align-content: center;
+            gap: 1.3rem;
+        }
+
+        .form-panel h2 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--text);
+        }
+
+        .subtext {
+            margin: 0.35rem 0 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .field {
+            display: grid;
+            gap: 0.42rem;
+        }
+
+        label {
+            font-size: 0.89rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            border: 1px solid #c7d9d0;
+            border-radius: var(--radius-sm);
+            padding: 0.82rem 0.88rem;
+            font: 600 0.95rem/1.2 var(--font-body);
+            color: var(--text);
+            background: #fcfdfd;
+            transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+        }
+
+        input::placeholder {
+            color: #7a9488;
+        }
+
+        input:focus-visible {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--ring);
+            background-color: #ffffff;
+        }
+
+        .toggle-pass {
+            position: absolute;
+            top: 50%;
+            right: 0.35rem;
+            transform: translateY(-50%);
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #3f5f52;
+            font: 700 0.78rem/1 var(--font-body);
+            letter-spacing: 0.02em;
+            padding: 0.45rem 0.55rem;
+            cursor: pointer;
+        }
+
+        .toggle-pass:hover,
+        .toggle-pass:focus-visible {
+            background: #eaf5ef;
+            color: #163f31;
+            outline: none;
+        }
+
+        .field-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.7rem;
+            margin-top: 0.2rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.86rem;
+            color: var(--muted);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .checkbox input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+
+        .link {
+            color: var(--primary-strong);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .link:hover,
+        .link:focus-visible {
+            text-decoration: underline;
+            outline: none;
+        }
+
+        .btn-submit {
+            border: 0;
+            border-radius: var(--radius-md);
+            background: linear-gradient(160deg, var(--primary), var(--primary-strong));
+            color: #f7fbf9;
+            font: 700 0.98rem/1 var(--font-heading);
+            letter-spacing: 0.02em;
+            padding: 0.95rem 1rem;
+            cursor: pointer;
+            box-shadow: 0 9px 20px rgba(15, 123, 95, 0.3);
+            transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(15, 123, 95, 0.35);
+            filter: saturate(1.06);
+        }
+
+        .btn-submit:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px var(--ring), 0 12px 24px rgba(15, 123, 95, 0.32);
+        }
+
+        .btn-submit[disabled] {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .signup {
+            margin: 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .signup a {
+            color: var(--primary-strong);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .signup a:hover,
+        .signup a:focus-visible {
+            text-decoration: underline;
+            outline: none;
+        }
+
+        @media (max-width: 900px) {
+            .login-shell {
+                grid-template-columns: 1fr;
+                width: min(560px, 100%);
+            }
+
+            .brand-panel {
+                gap: 1.4rem;
+            }
+
+            .pulse-stats {
+                max-width: 380px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+
+            .brand-panel,
+            .form-panel {
+                padding: 1.2rem;
+            }
+
+            .pulse-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pulse-stats div:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @keyframes rise-in {
+            from {
+                opacity: 0;
+                transform: translateY(14px) scale(0.985);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition-duration: 0ms !important;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="login-shell" aria-label="Login page">
+        <section class="brand-panel" aria-hidden="true">
+            <div class="brand-copy">
+                <p class="brand-mark">FinanceTracker</p>
+                <h1>Track every dollar with confidence.</h1>
+                <p>Sign in to view your dashboards, budgets, spending trends, and savings goals in one place.</p>
+            </div>
+            <div class="pulse-stats">
+                <div>
+                    <strong>99.9%</strong>
+                    <span>Uptime</span>
+                </div>
+                <div>
+                    <strong>256-bit</strong>
+                    <span>Encryption</span>
+                </div>
+                <div>
+                    <strong>24/7</strong>
+                    <span>Monitoring</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-panel">
+            <header>
+                <h2>Welcome back</h2>
+                <p class="subtext">Use your account credentials to continue.</p>
+            </header>
+
+            <form id="loginForm" th:action="@{/login}" method="post">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <div class="input-wrap">
+                        <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                spellcheck="false">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password">
+                        <button type="button" class="toggle-pass" id="togglePassword" aria-label="Show password">Show</button>
+                    </div>
+                </div>
+
+                <div class="field-meta">
+                    <label class="checkbox" for="rememberMe">
+                        <input id="rememberMe" name="remember-me" type="checkbox">
+                        Keep me signed in
+                    </label>
+                    <a class="link" href="#">Forgot password?</a>
+                </div>
+
+                <button class="btn-submit" type="submit">Sign In</button>
+            </form>
+
+            <p class="signup">New here? <a href="#">Create an account</a></p>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var passwordInput = document.getElementById("password");
+            var togglePassword = document.getElementById("togglePassword");
+
+            togglePassword.addEventListener("click", function () {
+                var isHidden = passwordInput.type === "password";
+                passwordInput.type = isHidden ? "text" : "password";
+                togglePassword.textContent = isHidden ? "Hide" : "Show";
+                togglePassword.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+            });
+        })();
+    </script>
+</body>
+</html>

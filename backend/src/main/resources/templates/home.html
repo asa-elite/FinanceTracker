@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker | Home</title>
+    <style>
+        :root {
+            --bg: #f6f2e8;
+            --surface: #ffffff;
+            --text: #1f2e2a;
+            --muted: #566b62;
+            --primary: #0f7b5f;
+            --primary-strong: #0a5a45;
+            --outline: #d2ddd8;
+            --shadow: 0 14px 32px rgba(31, 46, 42, 0.14);
+            --radius: 18px;
+            --font-heading: "Poppins", "Segoe UI", "Helvetica Neue", sans-serif;
+            --font-body: "Nunito Sans", "Segoe UI", "Helvetica Neue", sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: var(--text);
+            background:
+                radial-gradient(circle at 85% 12%, rgba(15, 123, 95, 0.16), transparent 38%),
+                radial-gradient(circle at 10% 90%, rgba(231, 180, 90, 0.25), transparent 35%),
+                var(--bg);
+            display: grid;
+            place-items: center;
+            padding: 1.25rem;
+        }
+
+        .panel {
+            width: min(760px, 100%);
+            background: var(--surface);
+            border: 1px solid var(--outline);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(1.2rem, 3vw, 2.2rem);
+        }
+
+        h1 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn,
+        .link-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.72rem 1rem;
+            font: 700 0.92rem/1 var(--font-heading);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+        }
+
+        .btn {
+            color: #f6fbf8;
+            background: linear-gradient(160deg, var(--primary), var(--primary-strong));
+            box-shadow: 0 8px 16px rgba(15, 123, 95, 0.28);
+        }
+
+        .btn:hover,
+        .link-btn:hover {
+            transform: translateY(-1px);
+            filter: saturate(1.04);
+        }
+
+        .link-btn {
+            color: var(--primary-strong);
+            background: #edf5f1;
+        }
+
+        form {
+            margin: 0;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="panel">
+        <h1>Welcome to Finance Tracker</h1>
+        <p>You are in your dashboard home. Jump to your greeting page or sign out securely.</p>
+
+        <div class="actions">
+            <a class="link-btn" th:href="@{/hello}">Open Greeting Page</a>
+
+            <form th:if="${#authentication.authenticated}" th:action="@{/logout}" method="post">
+                <button class="btn" type="submit" value="Sign Out">Logout</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
